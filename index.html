@@ -55,11 +55,15 @@
         </form>
     </section>
 <script>
-    // Ask the user for their name
-    let userName = prompt("What is your name?");
+    window.onload = function() {
+        let userName = prompt("What is your name?");
 
-    // Update the welcome message with their name
-    document.getElementById("welcome").textContent =
-        "Welcome, " + userName + "!";
+        if (userName) {
+            document.getElementById("welcome").textContent =
+                "Welcome, " + userName + "!";
+        } else {
+            document.getElementById("welcome").textContent = "Welcome!";
+        }
+    };
 </script>
 </body>
