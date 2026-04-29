@@ -106,60 +106,98 @@
     </section>
 
     <script>
-        window.onload = function() {
-            let userName = prompt("What is your name?");
+window.onload = function() {
+    let userName = prompt("What is your name?");
 
-            if (userName) {
-                document.getElementById("welcome").textContent =
-                    "Welcome, " + userName + "!";
-            } else {
-                document.getElementById("welcome").textContent = "Welcome!";
-            }
+    if (userName) {
+        document.getElementById("welcome").textContent =
+            "Welcome, " + userName + "!";
+    } else {
+        document.getElementById("welcome").textContent = "Welcome!";
+    }
 
-            // Featured content logic
-            let projectCount = document.querySelectorAll("#projects li").length;
+    // FEATURED CONTENT LOGIC
+    let projectCount = document.querySelectorAll("#projects li").length;
 
-            if (projectCount < 3) {
-                document.getElementById("resources").style.display = "block";
-                document.getElementById("personal").style.display = "block";
-            } else {
-                document.getElementById("resources").style.display = "none";
-                document.getElementById("personal").style.display = "block";
-            }
+    if (projectCount < 3) {
+        document.getElementById("resources").style.display = "block";
+        document.getElementById("personal").style.display = "block";
+    } else {
+        document.getElementById("resources").style.display = "none";
+        document.getElementById("personal").style.display = "block";
+    }
 
-            // Skills list
-            let skills = [
-            "HTML",
-            "CSS",
-            "JavaScript",
-            "Java",
-            "Python",
-            "C++",
-            "Git & GitHub",
-            "Mechatronics & Device Repair"
-        ];
-            let skillsList = document.getElementById("skillsList");
+    // SKILLS LIST (LOOP)
+    let skills = [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Java",
+        "Python",
+        "C++",
+        "Git & GitHub",
+        "Mechatronics & Device Repair"
+    ];
 
-            skills.forEach(function(skill) {
-                let li = document.createElement("li");
-                li.textContent = skill;
-                skillsList.appendChild(li);
-            });
-            
-             // Dark mode toggle
-            document.getElementById("darkModeToggle").addEventListener("change", function() {
-                document.body.classList.toggle("dark-mode");
-            });
-        };
+    let skillsList = document.getElementById("skillsList");
 
-        // Form interaction
-        document.querySelector("#contact button").addEventListener("click", function(e) {
-            e.preventDefault();
+    skills.forEach(function(skill) {
+        let li = document.createElement("li");
+        li.textContent = skill;
+        skillsList.appendChild(li);
+    });
 
-            let name = document.getElementById("name").value;
+    // DARK MODE
+    document.getElementById("darkModeToggle").addEventListener("change", function() {
+        document.body.classList.toggle("dark-mode");
+    });
 
-            alert("Thank you, " + name + ", your message has been sent!");
-        });
+    // DYNAMIC PROJECT MESSAGE
+    let newProject = document.createElement("p");
+    newProject.textContent = "Recently, I’ve been working on interactive JavaScript projects that focus on user experience and dynamic content.";
+    document.getElementById("projects").appendChild(newProject);
+
+    // DELAYED NOTIFICATION
+    setTimeout(function() {
+        let notice = document.createElement("p");
+        notice.textContent = "✨ New content has been added to this portfolio!";
+        notice.style.fontWeight = "bold";
+        notice.style.color = "green";
+
+        document.body.insertBefore(notice, document.body.firstChild);
+    }, 2000);
+
+    // MODIFY EXISTING ELEMENTS
+    let aboutHeader = document.querySelector("#about h2");
+    aboutHeader.style.color = "darkblue";
+
+    let projectsSection = document.getElementById("projects");
+    projectsSection.style.border = "2px solid gray";
+    projectsSection.style.padding = "10px";
+};
+
+// FORM WITH TIMED RESPONSE
+document.querySelector("#contact button").addEventListener("click", function(e) {
+    e.preventDefault();
+
+    let name = document.getElementById("name").value;
+
+    // Create or update status message
+    let status = document.getElementById("formStatus");
+
+    if (!status) {
+        status = document.createElement("p");
+        status.id = "formStatus";
+        document.getElementById("contact").appendChild(status);
+    }
+
+    // Show loading message
+    status.textContent = "Sending message...";
+
+    // Delay confirmation
+    setTimeout(function() {
+        status.textContent = "Message sent successfully! Thank you, " + name + ".";
+    }, 2500);
+});
     </script>
-
 </body>
