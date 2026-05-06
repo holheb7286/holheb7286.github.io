@@ -20,10 +20,56 @@
             color: white;
             border: 1px solid white;
         }
+
+        /* Modal background */
+        .modal {
+            display: flex;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            background-color: rgba(0, 0, 0, 0.5);
+
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modal box */
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+        }
+
+        /* Dark mode modal fix */
+        .dark-mode .modal-content {
+            background-color: #222;
+            color: white;
+        }
     </style>
 </head>
 
 <body>
+
+    <!-- Welcome Modal -->
+    <div id="welcomeModal" class="modal">
+
+        <div class="modal-content">
+            <h2>Welcome!</h2>
+
+            <p>
+                This page is a work in progress.
+            </p>
+
+            <button id="closeModal">Close</button>
+        </div>
+
+    </div>
 
     <!-- Dark Mode Toggle -->
     <label>
@@ -75,6 +121,7 @@
     <!-- Projects Section -->
     <section id="projects">
         <h2>Projects</h2>
+
         <p>Here are some of my projects:</p>
 
         <ul>
@@ -101,103 +148,144 @@
             <label>Message:</label><br>
             <textarea></textarea><br><br>
 
-            <button type="submit">Send</button>
+            <button type="submit" title="Click to send your message!">
+                Send
+            </button>
         </form>
     </section>
 
     <script>
-window.onload = function() {
-    let userName = prompt("What is your name?");
+        window.onload = function() {
 
-    if (userName) {
-        document.getElementById("welcome").textContent =
-            "Welcome, " + userName + "!";
-    } else {
-        document.getElementById("welcome").textContent = "Welcome!";
-    }
+            // FEATURED CONTENT LOGIC
+            let projectCount = document.querySelectorAll("#projects li").length;
 
-    // FEATURED CONTENT LOGIC
-    let projectCount = document.querySelectorAll("#projects li").length;
+            if (projectCount < 3) {
+                document.getElementById("resources").style.display = "block";
+                document.getElementById("personal").style.display = "block";
+            }
+            else {
+                document.getElementById("resources").style.display = "none";
+                document.getElementById("personal").style.display = "block";
+            }
 
-    if (projectCount < 3) {
-        document.getElementById("resources").style.display = "block";
-        document.getElementById("personal").style.display = "block";
-    } else {
-        document.getElementById("resources").style.display = "none";
-        document.getElementById("personal").style.display = "block";
-    }
+            // SKILLS LIST (LOOP)
+            let skills = [
+                "HTML",
+                "CSS",
+                "JavaScript",
+                "Java",
+                "Python",
+                "C++",
+                "Git & GitHub",
+                "Mechatronics & Device Repair"
+            ];
 
-    // SKILLS LIST (LOOP)
-    let skills = [
-        "HTML",
-        "CSS",
-        "JavaScript",
-        "Java",
-        "Python",
-        "C++",
-        "Git & GitHub",
-        "Mechatronics & Device Repair"
-    ];
+            let skillsList = document.getElementById("skillsList");
 
-    let skillsList = document.getElementById("skillsList");
+            skills.forEach(function(skill) {
+                let li = document.createElement("li");
+                li.textContent = skill;
+                skillsList.appendChild(li);
+            });
 
-    skills.forEach(function(skill) {
-        let li = document.createElement("li");
-        li.textContent = skill;
-        skillsList.appendChild(li);
-    });
+            // DARK MODE WITH LOCAL STORAGE
+            let darkToggle = document.getElementById("darkModeToggle");
 
-    // DARK MODE
-    document.getElementById("darkModeToggle").addEventListener("change", function() {
-        document.body.classList.toggle("dark-mode");
-    });
+            // Apply saved preference
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+                darkToggle.checked = true;
+            }
 
-    // DYNAMIC PROJECT MESSAGE
-    let newProject = document.createElement("p");
-    newProject.textContent = "Recently, I’ve been working on interactive JavaScript projects that focus on user experience and dynamic content.";
-    document.getElementById("projects").appendChild(newProject);
+            // Toggle dark mode
+            darkToggle.addEventListener("change", function() {
 
-    // DELAYED NOTIFICATION
-    setTimeout(function() {
-        let notice = document.createElement("p");
-        notice.textContent = "New content has been added to this portfolio!";
-        notice.style.fontWeight = "bold";
-        notice.style.color = "green";
+                if (darkToggle.checked) {
 
-        document.body.insertBefore(notice, document.body.firstChild);
-    }, 2000);
+                    document.body.classList.add("dark-mode");
 
-    // MODIFY EXISTING ELEMENTS
-    let aboutHeader = document.querySelector("#about h2");
-    aboutHeader.style.color = "darkblue";
+                    localStorage.setItem("darkMode", "enabled");
+                }
+                else {
 
-    let projectsSection = document.getElementById("projects");
-    projectsSection.style.border = "2px solid gray";
-    projectsSection.style.padding = "10px";
-};
+                    document.body.classList.remove("dark-mode");
 
-// FORM WITH TIMED RESPONSE
-document.querySelector("#contact button").addEventListener("click", function(e) {
-    e.preventDefault();
+                    localStorage.setItem("darkMode", "disabled");
+                }
+            });
 
-    let name = document.getElementById("name").value;
+            // DYNAMIC PROJECT MESSAGE
+            let newProject = document.createElement("p");
 
-    // Create or update status message
-    let status = document.getElementById("formStatus");
+            newProject.textContent =
+                "Recently, I’ve been working on interactive JavaScript projects that focus on user experience and dynamic content.";
 
-    if (!status) {
-        status = document.createElement("p");
-        status.id = "formStatus";
-        document.getElementById("contact").appendChild(status);
-    }
+            document.getElementById("projects").appendChild(newProject);
 
-    // Show loading message
-    status.textContent = "Sending message...";
+            // DELAYED NOTIFICATION
+            setTimeout(function() {
 
-    // Delay confirmation
-    setTimeout(function() {
-        status.textContent = "Message sent successfully! Thank you, " + name + ".";
-    }, 2500);
-});
+                let notice = document.createElement("p");
+
+                notice.textContent =
+                    "New content has been added to this portfolio!";
+
+                notice.style.fontWeight = "bold";
+                notice.style.color = "green";
+
+                document.body.insertBefore(notice, document.body.firstChild);
+
+            }, 2000);
+
+            // MODIFY EXISTING ELEMENTS
+            let aboutHeader = document.querySelector("#about h2");
+
+            if (!document.body.classList.contains("dark-mode")) {
+                aboutHeader.style.color = "darkblue";
+            }
+
+            let projectsSection = document.getElementById("projects");
+
+            projectsSection.style.border = "2px solid gray";
+            projectsSection.style.padding = "10px";
+        };
+
+        // FORM WITH TIMED RESPONSE
+        document.querySelector("#contact button").addEventListener("click", function(e) {
+
+            e.preventDefault();
+
+            let name = document.getElementById("name").value;
+
+            // Create or update status message
+            let status = document.getElementById("formStatus");
+
+            if (!status) {
+                status = document.createElement("p");
+                status.id = "formStatus";
+
+                document.getElementById("contact").appendChild(status);
+            }
+
+            // Loading message
+            status.textContent = "Sending message...";
+
+            // Delayed confirmation
+            setTimeout(function() {
+
+                status.textContent =
+                    "Message sent successfully! Thank you, " + name + ".";
+
+            }, 2500);
+        });
+
+        // CLOSE MODAL
+        document.getElementById("closeModal").addEventListener("click", function() {
+
+            document.getElementById("welcomeModal").style.display = "none";
+
+        });
     </script>
+
 </body>
