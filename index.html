@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8" />
 
     <meta name="viewport"
@@ -243,46 +242,46 @@
             // PROJECT OBJECTS
             let projectData = [
 
-    {
-        title: "Pet Health Manager",
+                {
+                    title: "Pet Health Manager",
 
-        summary:
-            "A console-based Java application for managing pet health records, appointments, prescriptions, and emergency contacts using SQLite and object-oriented programming principles.",
+                    summary:
+                        "A console-based Java application for managing pet health records, appointments, prescriptions, and emergency contacts using SQLite and object-oriented programming principles.",
 
-        image:
-            "https://cdn-icons-png.flaticon.com/512/616/616408.png",
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/616/616408.png",
 
-        repo:
-            "https://github.com/holheb7286/SDC330"
-    },
+                    repo:
+                        "https://github.com/holheb7286/SDC330"
+                },
 
-    {
-        title: "Java Banking Application",
+                {
+                    title: "Java Banking Application",
 
-        summary:
-            "A console-based banking system built in Java with SQLite integration, supporting account management, secure transactions, CRUD operations, and persistent financial data storage.",
+                    summary:
+                        "A console-based banking system built in Java with SQLite integration, supporting account management, secure transactions, CRUD operations, and persistent financial data storage.",
 
-        image:
-            "https://cdn-icons-png.flaticon.com/512/3135/3135706.png",
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/3135/3135706.png",
 
-        repo:
-            "https://github.com/holheb7286/SDC330L"
-    },
+                    repo:
+                        "https://github.com/holheb7286/SDC330L"
+                },
 
-    {
-        title: "Online Store MVC Application",
+                {
+                    title: "Online Store MVC Application",
 
-        summary:
-            "A PHP and MySQL web application built using MVC architecture that allows users to browse products, manage a shopping cart, and complete a checkout process with session-based functionality.",
+                    summary:
+                        "A PHP and MySQL web application built using MVC architecture that allows users to browse products, manage a shopping cart, and complete a checkout process with session-based functionality.",
 
-        image:
-            "https://cdn-icons-png.flaticon.com/512/3081/3081559.png"
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/3081/3081559.png",
 
-        repo:
-            "https://github.com/holheb7286/SDC310L"
-    }
-];
-            
+                    repo:
+                        "https://github.com/holheb7286/SDC310L"
+                }
+            ];
+
             // STORE PROJECT DATA
             if (!sessionStorage.getItem("projects")) {
 
@@ -500,6 +499,20 @@
 
             projectsSection.style.padding =
                 "10px";
+
+            // CLOSE MODAL
+            document.getElementById(
+                "closeModal"
+            ).addEventListener(
+                "click",
+                function () {
+
+                    document.getElementById(
+                        "welcomeModal"
+                    ).style.display = "none";
+                }
+            );
+
         };
 
         // FORM INTERACTION
@@ -548,19 +561,6 @@
                         + name + ".";
 
                 }, 2500);
-            }
-        );
-
-        // CLOSE MODAL
-        document.getElementById(
-            "closeModal"
-        ).addEventListener(
-            "click",
-            function () {
-
-                document.getElementById(
-                    "welcomeModal"
-                ).style.display = "none";
             }
         );
 
