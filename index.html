@@ -1,10 +1,18 @@
-<!-- CSS Stylization for Light & Dark Modes -->
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
+
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1.0">
+
     <title>Holly's Portfolio</title>
 
     <style>
+
+        /* Dark Mode Styling */
         .dark-mode {
             background-color: black;
             color: white;
@@ -21,36 +29,53 @@
             border: 1px solid white;
         }
 
-        /* Modal background */
+        /* Modal Background */
         .modal {
             display: flex;
             position: fixed;
             z-index: 1000;
+
             left: 0;
             top: 0;
+
             width: 100%;
             height: 100%;
 
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color:
+                rgba(0, 0, 0, 0.5);
 
             justify-content: center;
             align-items: center;
         }
 
-        /* Modal box */
+        /* Modal Content Box */
         .modal-content {
             background-color: white;
+
             padding: 20px;
+
             border-radius: 10px;
+
             text-align: center;
+
             width: 300px;
         }
 
-        /* Dark mode modal fix */
+        /* Dark Mode Modal */
         .dark-mode .modal-content {
             background-color: #222;
             color: white;
         }
+
+        /* Project Cards */
+        .project-card {
+            border: 1px solid gray;
+
+            padding: 10px;
+
+            margin-bottom: 15px;
+        }
+
     </style>
 </head>
 
@@ -60,117 +85,288 @@
     <div id="welcomeModal" class="modal">
 
         <div class="modal-content">
+
             <h2>Welcome!</h2>
 
             <p>
                 This page is a work in progress.
             </p>
 
-            <button id="closeModal">Close</button>
+            <button id="closeModal">
+                Close
+            </button>
+
         </div>
 
     </div>
 
     <!-- Dark Mode Toggle -->
     <label>
-        <input type="checkbox" id="darkModeToggle">
+
+        <input type="checkbox"
+               id="darkModeToggle">
+
         Dark Mode
+
     </label>
 
     <!-- Navigation -->
     <nav>
+
         <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#contact">Contact</a></li>
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#projects">Projects</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+
         </ul>
+
     </nav>
 
-    <!-- Welcome message -->
-    <h1 id="welcome">Welcome!</h1>
+    <!-- Welcome Heading -->
+    <h1 id="welcome">
+        Welcome!
+    </h1>
 
     <!-- About Section -->
     <section id="about">
+
         <h2>About Me</h2>
 
         <p>
-            Hi, I’m Holly. I’m learning web development and working toward building
-            interactive and creative applications. I’m especially interested in
-            combining design and functionality to create engaging user experiences.
+            Hi, I’m Holly. I’m learning web development
+            and working toward building interactive and
+            creative applications. I’m especially interested
+            in combining design and functionality to create
+            engaging user experiences.
         </p>
 
         <h3>Skills</h3>
+
         <ul id="skillsList"></ul>
+
     </section>
 
     <!-- Featured Section -->
     <section id="featured">
+
         <h2>Featured Content</h2>
 
         <div id="resources">
+
             <h3>University Resources</h3>
-            <a href="https://ecpi.edu" target="_blank">ECPI Program Home</a>
+
+            <a href="https://ecpi.edu"
+               target="_blank">
+
+                ECPI Program Home
+
+            </a>
+
         </div>
 
         <div id="personal">
+
             <h3>Personal Projects</h3>
-            <a href="https://github.com/holheb7286" target="_blank">My GitHub</a>
+
+            <a href="https://github.com/holheb7286"
+               target="_blank">
+
+                My GitHub
+
+            </a>
+
         </div>
+
     </section>
 
     <!-- Projects Section -->
     <section id="projects">
+
         <h2>Projects</h2>
 
-        <p>Here are some of my projects:</p>
+        <p>
+            Here are some of my projects:
+        </p>
 
-        <ul>
-            <li><a href="https://github.com/holheb7286/SDC330">Project 1</a></li>
-            <li><a href="https://github.com/holheb7286/SDC330L">Project 2</a></li>
-            <li><a href="https://github.com/holheb7286/SDC310L">Project 3</a></li>
-        </ul>
+        <div id="projectContainer"></div>
+
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
+
         <h2>Contact</h2>
 
         <form>
+
             <label>Name:</label><br>
-            <input type="text" id="name"><br><br>
+
+            <input type="text"
+                   id="name"><br><br>
 
             <label>Email:</label><br>
+
             <input type="email"><br><br>
 
             <label>Subject:</label><br>
+
             <input type="text"><br><br>
 
             <label>Message:</label><br>
+
             <textarea></textarea><br><br>
 
-            <button type="submit" title="Click to send your message!">
+            <button type="submit"
+                    title="Click to send your message!">
+
                 Send
+
             </button>
+
         </form>
+
     </section>
 
     <script>
-        window.onload = function() {
+
+        window.onload = function () {
+
+            // PROJECT OBJECTS
+            let projectData = [
+
+                {
+                    title: "SDC330",
+
+                    summary:
+                        "A collection of introductory web development exercises using HTML, CSS, and JavaScript.",
+
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/5968/5968267.png",
+
+                    repo:
+                        "https://github.com/holheb7286/SDC330"
+                },
+
+                {
+                    title: "SDC330L",
+
+                    summary:
+                        "Lab-based JavaScript and DOM manipulation projects focused on interactive functionality.",
+
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/5968/5968292.png",
+
+                    repo:
+                        "https://github.com/holheb7286/SDC330L"
+                },
+
+                {
+                    title: "SDC310L",
+
+                    summary:
+                        "Programming exercises and assignments involving logic, problem solving, and software concepts.",
+
+                    image:
+                        "https://cdn-icons-png.flaticon.com/512/6132/6132222.png",
+
+                    repo:
+                        "https://github.com/holheb7286/SDC310L"
+                }
+            ];
+
+            // STORE PROJECT DATA
+            if (!sessionStorage.getItem("projects")) {
+
+                sessionStorage.setItem(
+                    "projects",
+                    JSON.stringify(projectData)
+                );
+            }
+
+            // RETRIEVE PROJECT DATA
+            let storedProjects =
+                JSON.parse(
+                    sessionStorage.getItem("projects")
+                );
+
+            // PROJECT CONTAINER
+            let projectContainer =
+                document.getElementById(
+                    "projectContainer"
+                );
+
+            // RENDER PROJECTS
+            storedProjects.forEach(function (project) {
+
+                let projectCard =
+                    document.createElement("div");
+
+                projectCard.classList.add(
+                    "project-card"
+                );
+
+                projectCard.innerHTML = `
+
+                    <h3>${project.title}</h3>
+
+                    <img
+                        src="${project.image}"
+                        width="60"
+                        alt="${project.title}"
+                    >
+
+                    <p>${project.summary}</p>
+
+                    <a href="${project.repo}"
+                       target="_blank">
+
+                        View Repository
+
+                    </a>
+                `;
+
+                projectContainer.appendChild(
+                    projectCard
+                );
+            });
 
             // FEATURED CONTENT LOGIC
-            let projectCount = document.querySelectorAll("#projects li").length;
+            let projectCount =
+                storedProjects.length;
 
             if (projectCount < 3) {
-                document.getElementById("resources").style.display = "block";
-                document.getElementById("personal").style.display = "block";
+
+                document.getElementById(
+                    "resources"
+                ).style.display = "block";
+
+                document.getElementById(
+                    "personal"
+                ).style.display = "block";
             }
             else {
-                document.getElementById("resources").style.display = "none";
-                document.getElementById("personal").style.display = "block";
+
+                document.getElementById(
+                    "resources"
+                ).style.display = "none";
+
+                document.getElementById(
+                    "personal"
+                ).style.display = "block";
             }
 
-            // SKILLS LIST (LOOP)
+            // SKILLS ARRAY
             let skills = [
+
                 "HTML",
                 "CSS",
                 "JavaScript",
@@ -181,111 +377,194 @@
                 "Mechatronics & Device Repair"
             ];
 
-            let skillsList = document.getElementById("skillsList");
+            // DISPLAY SKILLS
+            let skillsList =
+                document.getElementById(
+                    "skillsList"
+                );
 
-            skills.forEach(function(skill) {
-                let li = document.createElement("li");
+            skills.forEach(function (skill) {
+
+                let li =
+                    document.createElement("li");
+
                 li.textContent = skill;
+
                 skillsList.appendChild(li);
             });
 
-            // DARK MODE WITH LOCAL STORAGE
-            let darkToggle = document.getElementById("darkModeToggle");
+            // DARK MODE
+            let darkToggle =
+                document.getElementById(
+                    "darkModeToggle"
+                );
 
-            // Apply saved preference
-            if (localStorage.getItem("darkMode") === "enabled") {
-                document.body.classList.add("dark-mode");
+            // APPLY SAVED PREFERENCE
+            if (
+                localStorage.getItem("darkMode")
+                === "enabled"
+            ) {
+
+                document.body.classList.add(
+                    "dark-mode"
+                );
+
                 darkToggle.checked = true;
             }
 
-            // Toggle dark mode
-            darkToggle.addEventListener("change", function() {
+            // TOGGLE DARK MODE
+            darkToggle.addEventListener(
+                "change",
+                function () {
 
-                if (darkToggle.checked) {
+                    if (darkToggle.checked) {
 
-                    document.body.classList.add("dark-mode");
+                        document.body.classList.add(
+                            "dark-mode"
+                        );
 
-                    localStorage.setItem("darkMode", "enabled");
+                        localStorage.setItem(
+                            "darkMode",
+                            "enabled"
+                        );
+                    }
+                    else {
+
+                        document.body.classList.remove(
+                            "dark-mode"
+                        );
+
+                        localStorage.setItem(
+                            "darkMode",
+                            "disabled"
+                        );
+                    }
                 }
-                else {
-
-                    document.body.classList.remove("dark-mode");
-
-                    localStorage.setItem("darkMode", "disabled");
-                }
-            });
+            );
 
             // DYNAMIC PROJECT MESSAGE
-            let newProject = document.createElement("p");
+            let newProject =
+                document.createElement("p");
 
             newProject.textContent =
-                "Recently, I’ve been working on interactive JavaScript projects that focus on user experience and dynamic content.";
+                "Recently, I’ve been working on interactive JavaScript projects focused on user experience and dynamic content.";
 
-            document.getElementById("projects").appendChild(newProject);
+            document.getElementById(
+                "projects"
+            ).appendChild(newProject);
 
             // DELAYED NOTIFICATION
-            setTimeout(function() {
+            setTimeout(function () {
 
-                let notice = document.createElement("p");
+                let notice =
+                    document.createElement("p");
 
                 notice.textContent =
                     "New content has been added to this portfolio!";
 
-                notice.style.fontWeight = "bold";
-                notice.style.color = "green";
+                notice.style.fontWeight =
+                    "bold";
 
-                document.body.insertBefore(notice, document.body.firstChild);
+                notice.style.color =
+                    "green";
+
+                document.body.appendChild(
+                    notice
+                );
 
             }, 2000);
 
             // MODIFY EXISTING ELEMENTS
-            let aboutHeader = document.querySelector("#about h2");
+            let aboutHeader =
+                document.querySelector(
+                    "#about h2"
+                );
 
-            if (!document.body.classList.contains("dark-mode")) {
-                aboutHeader.style.color = "darkblue";
+            if (
+                !document.body.classList.contains(
+                    "dark-mode"
+                )
+            ) {
+
+                aboutHeader.style.color =
+                    "darkblue";
             }
 
-            let projectsSection = document.getElementById("projects");
+            let projectsSection =
+                document.getElementById(
+                    "projects"
+                );
 
-            projectsSection.style.border = "2px solid gray";
-            projectsSection.style.padding = "10px";
+            projectsSection.style.border =
+                "2px solid gray";
+
+            projectsSection.style.padding =
+                "10px";
         };
 
-        // FORM WITH TIMED RESPONSE
-        document.querySelector("#contact button").addEventListener("click", function(e) {
+        // FORM INTERACTION
+        document.querySelector(
+            "#contact button"
+        ).addEventListener(
+            "click",
+            function (e) {
 
-            e.preventDefault();
+                e.preventDefault();
 
-            let name = document.getElementById("name").value;
+                let name =
+                    document.getElementById(
+                        "name"
+                    ).value;
 
-            // Create or update status message
-            let status = document.getElementById("formStatus");
+                let status =
+                    document.getElementById(
+                        "formStatus"
+                    );
 
-            if (!status) {
-                status = document.createElement("p");
-                status.id = "formStatus";
+                // CREATE STATUS MESSAGE
+                if (!status) {
 
-                document.getElementById("contact").appendChild(status);
-            }
+                    status =
+                        document.createElement(
+                            "p"
+                        );
 
-            // Loading message
-            status.textContent = "Sending message...";
+                    status.id = "formStatus";
 
-            // Delayed confirmation
-            setTimeout(function() {
+                    document.getElementById(
+                        "contact"
+                    ).appendChild(status);
+                }
 
+                // LOADING MESSAGE
                 status.textContent =
-                    "Message sent successfully! Thank you, " + name + ".";
+                    "Sending message...";
 
-            }, 2500);
-        });
+                // DELAYED RESPONSE
+                setTimeout(function () {
+
+                    status.textContent =
+                        "Message sent successfully! Thank you, "
+                        + name + ".";
+
+                }, 2500);
+            }
+        );
 
         // CLOSE MODAL
-        document.getElementById("closeModal").addEventListener("click", function() {
+        document.getElementById(
+            "closeModal"
+        ).addEventListener(
+            "click",
+            function () {
 
-            document.getElementById("welcomeModal").style.display = "none";
+                document.getElementById(
+                    "welcomeModal"
+                ).style.display = "none";
+            }
+        );
 
-        });
     </script>
 
 </body>
+</html>
